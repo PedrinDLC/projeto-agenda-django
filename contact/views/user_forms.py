@@ -1,4 +1,6 @@
-from django.shortcuts import render
+from django.contrib import messages
+from django.shortcuts import redirect, render
+
 from contact.forms import RegisterForm
 
 
@@ -10,6 +12,8 @@ def register(request):
 
         if form.is_valid():
             form.save()
+            messages.success(request, "Usuário registrado!")
+            return redirect("contact:index")
 
     return render(
         request,
